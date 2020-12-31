@@ -1,0 +1,7 @@
+.profile__text {
+    color: #FFFFFF;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
