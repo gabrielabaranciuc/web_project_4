@@ -1,0 +1,11 @@
+@import url(./__image/card__image.css);
+@import url(./__text/card__text.css);
+@import url(./__title/card__title.css);
+@import url(./__like-button/card__like-button.css);
+
+.card {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 10px;
+    max-width: 282px;
+}
