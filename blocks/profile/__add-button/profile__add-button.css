@@ -12,5 +12,16 @@
     align-items: center;
     margin: 0;
     padding: 0;
+    transition: 2s linear;
+}
+
+.profile__add-button:hover {
     cursor: pointer;
+    opacity: 0.5;
+}
+
+@media screen and (max-width: 591px) {
+    .profile__add-button {
+        width: 100%;
+    }
 }
