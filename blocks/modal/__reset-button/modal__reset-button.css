@@ -1,0 +1,23 @@
+.modal__reset-button {
+    width: 40px;
+    height: 40px;
+    background-image: url(../../../Images/close-button.svg);
+    background-color: transparent;
+    background-size: contain;
+    border: none;
+    position: absolute;
+    top: -35px;
+    right: -35px;
+    cursor: pointer;
+    padding: 0;
+}
+
+@media screen and (max-width: 591px) {
+    .modal__reset-button {
+        width: 26px;
+        height: 26px;
+        position: absolute;
+        top: -30px;
+        right: -5px;
+    }
+}
