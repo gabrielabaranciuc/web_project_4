@@ -1,17 +1,20 @@
 .header__logo {
+    background: url("../../../Images/logo-around-us.svg") 0 0 / cover no-repeat;
     margin: 0 auto 41px 0;
     max-width: 173px;
-    transition: 2s linear;
+    height: 33px;
+    transition: 0.3s linear;
 }
 
 .header__logo:hover {
     cursor: pointer;
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
 @media screen and (max-width: 591px) {
     .header__logo { 
-        max-width: 126px;
+        width: 126px;
+        height: 24px;
         margin: 0 auto 32px 27px;
     }
 }
