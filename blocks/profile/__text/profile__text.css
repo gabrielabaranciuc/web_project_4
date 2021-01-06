@@ -4,6 +4,9 @@
     display: flex;
     flex-direction: column;
     text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 @media screen and (max-width: 889px) {
