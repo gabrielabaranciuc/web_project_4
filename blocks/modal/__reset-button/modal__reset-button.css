@@ -8,15 +8,19 @@
     position: absolute;
     top: -35px;
     right: -35px;
-    cursor: pointer;
     padding: 0;
+    transition: 0.3s linear;
+}
+
+.modal__reset-button:hover {
+    cursor: pointer;
+    opacity: 0.8;
 }
 
 @media screen and (max-width: 591px) {
     .modal__reset-button {
         width: 26px;
         height: 26px;
-        position: absolute;
         top: -30px;
         right: -5px;
     }

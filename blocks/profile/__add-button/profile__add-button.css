@@ -4,20 +4,18 @@
     border: 2px solid #FFFFFF;
     border-radius: 2px;
     background-color: transparent;
-    background: url(../../../Images/add-button.svg);
-    background-repeat: no-repeat;
-    background-position: center;
+    background: url(../../../Images/add-button.svg) center no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
     padding: 0;
-    transition: 2s linear;
+    transition: 0.3s linear;
 }
 
 .profile__add-button:hover {
     cursor: pointer;
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
 @media screen and (max-width: 591px) {
