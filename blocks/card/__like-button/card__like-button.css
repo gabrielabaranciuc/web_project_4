@@ -12,5 +12,6 @@
 
 .card__like-button:hover {
     cursor: pointer;
-    opacity: 0.8;
+    opacity: 0.5; 
+    /*according to specifications in figma*/
 }
