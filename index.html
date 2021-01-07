@@ -42,7 +42,7 @@
                     <img class="card__image" src="./Images/lake-louise.jpg" alt="lake louise photo">
                     <div class="card__text">
                         <h2 class="card__title">Lake Louise</h2>
-                        <button class="card__like-button" aria-label="like" type="bu tton"></button>
+                        <button class="card__like-button" aria-label="like" type="button"></button>
                     </div>
                 </li>
                 <li class="card">
@@ -80,18 +80,18 @@
         <p class="footer__copyright">&copy; 2020 Around The U.S.</p>
     </footer>
 
-    <section class="modal">
+    <div class="modal">
         <div class="modal__container">
-            <h2 class="modal__header">Edit profile</h2>
-            <form action="#" class="form">
-                <input type="text" name="name" class="form__input form__input_name" value="Jacques Cousteau">
-                <input type="text" name="title" class="form__input form__input_title" value="Explorer">
-                <button class="form__submit-button" type="submit" aria-label="Save button" value="Save">Save</button>
+            <h3 class="modal__header">Edit profile</h3>
+            <form action="#" method="post" name="editForm" class="form">
+                <input type="text" name="name" placeholder="Name" class="form__input form__input_type form__input_type_name">
+                <input type="text" name="title" placeholder="About me" class="form__input form__input_type form__input_type_title">
+                <button class="form__submit-button" type="submit" aria-label="Save button">Save</button>
             </form>
             <button class="modal__reset-button" type="reset" aria-label="Close button"></button>
         </div>
-    </section>
-    <script type="text/javascript" src="scripts/scripts.js"></script>
+    </div>
+    <script src="scripts/scripts.js"></script>
 </body>
 
 </html>

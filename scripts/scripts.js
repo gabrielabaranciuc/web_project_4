@@ -4,8 +4,8 @@ let closeButton = document.querySelector('.modal__reset-button');
 let form = document.querySelector('.form');
 let modal = document.querySelector('.modal');
 
-let nameInput = document.querySelector('.form__input_name');
-let titleInput = document.querySelector('.form__input_title');
+let nameInput = document.querySelector('.form__input_type_name');
+let titleInput = document.querySelector('.form__input_type_title');
 let profileName = document.querySelector('.profile__name');
 let profileTitle = document.querySelector('.profile__title');
 
@@ -15,7 +15,7 @@ form.addEventListener('submit', function(Event) {
     profileName.textContent  = nameInput.value;
     profileTitle.textContent  = titleInput.value;
 
-    toggleModal()
+    toggleModal();
 })
 
 function toggleModal() {
@@ -23,6 +23,6 @@ function toggleModal() {
     modal.classList.toggle('modal_opened');
 }
 
-editButton.addEventListener('click', toggleModal)
+editButton.addEventListener('click', toggleModal);
 
-closeButton.addEventListener('click', toggleModal)
+closeButton.addEventListener('click', toggleModal);
