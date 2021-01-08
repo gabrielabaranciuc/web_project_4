@@ -10,10 +10,14 @@ let titleInput = document.querySelector('.form__input_type_title');
 let profileName = document.querySelector('.profile__name');
 let profileTitle = document.querySelector('.profile__title');
 
-function toggleModal () {
+function openModal () {
     nameInput.value = profileName.textContent;
     titleInput.value = profileTitle.textContent;
-    modal.classList.toggle('modal_opened');
+    modal.classList.add('modal_opened');
+}
+
+function closeModal () {
+    modal.classList.remove('modal_opened');
 }
 
 function formSubmitHandler(e) {
@@ -22,11 +26,11 @@ function formSubmitHandler(e) {
     profileName.textContent  = nameInput.value;
     profileTitle.textContent  = titleInput.value;
     
-    toggleModal();
+    modal.classList.remove('modal_opened');
 }
 
-editButton.addEventListener('click', toggleModal);
+editButton.addEventListener('click', openModal);
 
-closeButton.addEventListener('click', toggleModal);
+closeButton.addEventListener('click', closeModal);
 
 form.addEventListener('submit', formSubmitHandler);
