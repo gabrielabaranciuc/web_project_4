@@ -1,0 +1,9 @@
+.form__input_type_card-title {
+    margin-bottom: 29px;
+}
+
+@media screen and (max-width: 591px) {
+    .form__input_type_card-title {
+        margin-bottom: 30px;
+     }
+}

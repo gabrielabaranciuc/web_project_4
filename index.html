@@ -39,7 +39,8 @@
         <p class="footer__copyright">&copy; 2020 Around The U.S.</p>
     </footer>
 
-    <div class="modal">
+     <!-- edit profile --> 
+    <div class="modal modal_type_edit-profile">
         <div class="modal__container">
             <h3 class="modal__header">Edit profile</h3>
             <form action="#" method="post" name="editForm" class="form">
@@ -51,6 +52,18 @@
         </div>
     </div>
     
+     <!-- add new cards --> 
+    <div class="modal modal_type_add-card">
+        <div class="modal__container">
+            <h3 class="modal__header">New place</h3>
+            <form action="#" method="post" name="addForm" class="form">
+                <input type="text" name="title" placeholder="Title" class="form__input form__input_type_card-title" required>
+                <input type="url" name="image-link" placeholder="Image link" class="form__input form__input_type_url" required>
+                <button class="form__submit-button" type="submit" aria-label="Create button">Create</button>
+            </form>
+            <button class="modal__reset-button" type="reset" aria-label="Close button"></button>
+        </div>
+    </div>
     <!-- template cards -->
     <template class="card-template">
         <li class="card">

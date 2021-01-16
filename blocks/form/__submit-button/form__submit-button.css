@@ -14,7 +14,6 @@
 .form__submit-button:hover {
     cursor: pointer;
     opacity: 0.8;
-     /*according to specifications in figma*/
 }
 
 @media screen and (max-width: 591px) {
