@@ -69,6 +69,10 @@ function createCard(card) {
     const listItem = cardDeleteButton.closest(".card");
     listItem.remove();
   });
+
+  cardLikeButton.addEventListener('click', (e) => {
+    e.target.classList.toggle('card__like-button_active')
+  });
   
   return cardElement;
 }
