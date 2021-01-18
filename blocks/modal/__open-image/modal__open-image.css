@@ -1,0 +1,15 @@
+.modal__open-image {
+    padding: 0;
+    box-shadow: unset;
+    border-radius: 0;
+    background-color: unset;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    position: relative;
+    max-width: 75vw;
+    max-height: 75vh;
+    width: auto;
+    height: auto;
+}
