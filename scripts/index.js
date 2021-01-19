@@ -34,12 +34,13 @@ function createCard(card) {
   const cardTitle = cardElement.querySelector('.card__title');
   const cardDeleteButton = cardElement.querySelector('.card__delete-button');
   const cardLikeButton = cardElement.querySelector('.card__like-button');
-
+  const listItem = cardDeleteButton.closest(".card");
+  
   cardImage.style.backgroundImage = `url('${card.link}')`;
   cardTitle.textContent = card.name;
 
+  
   cardDeleteButton.addEventListener('click', () => {
-    const listItem = cardDeleteButton.closest(".card");
     listItem.remove();
   });
 
