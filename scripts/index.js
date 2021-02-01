@@ -24,7 +24,7 @@ const cardTemplate = document.querySelector('.card-template').content.querySelec
 const cardsList = document.querySelector('.cards__list');
 
 
-function toggleModal (card) {
+function toggleModal(card) {
   card.classList.toggle('modal_opened');
 }
 
@@ -35,11 +35,11 @@ function createCard(card) {
   const cardDeleteButton = cardElement.querySelector('.card__delete-button');
   const cardLikeButton = cardElement.querySelector('.card__like-button');
   const listItem = cardDeleteButton.closest(".card");
-  
+
   cardImage.style.backgroundImage = `url('${card.link}')`;
   cardTitle.textContent = card.name;
 
-  
+
   cardDeleteButton.addEventListener('click', () => {
     listItem.remove();
   });
@@ -50,7 +50,7 @@ function createCard(card) {
 
   cardImage.addEventListener('click', () => {
     modalImage.src = `${card.link}`;
-    modalImage.alt = `${card.name}`; 
+    modalImage.alt = `${card.name}`;
     modalImageCaption.textContent = card.name;
     toggleModal(openImageModal);
   });
@@ -62,7 +62,7 @@ function renderCard(card) {
   cardsList.prepend(createCard(card));
 }
 
-function editFormSubmitHandler (e) {
+function editFormSubmitHandler(e) {
   e.preventDefault();
 
   profileName.textContent = nameInput.value;
@@ -71,29 +71,29 @@ function editFormSubmitHandler (e) {
   toggleModal(editProfileModal);
 }
 
-function addFormSubmitHandler (e) {
+function addFormSubmitHandler(e) {
   e.preventDefault();
 
   const newCard =
-    {
-        name: cardTitleInput.value,
-        link: urlInput.value
-    };
+  {
+    name: cardTitleInput.value,
+    link: urlInput.value
+  };
   renderCard(newCard);
   toggleModal(addCardModal);
 }
 
-function closeModalEscapeKey (e) {
+function closeModalEscapeKey(e) {
   const modalEscapeKey = document.querySelector('.modal_opened');
-  if(e.key === "Escape" || e.key === "Esc") {
+  if (e.key === "Escape" || e.key === "Esc") {
     toggleModal(modalEscapeKey);
   }
   e.target.removeEventListener('keydown', closeModalEscapeKey);
 }
 
-function closeModalClickOverlay (e) {
+function closeModalClickOverlay(e) {
   const modalClick = e.target;
-  if(!modalClick.classList.contains('modal_opened')) {
+  if (!modalClick.classList.contains('modal_opened')) {
     return;
   }
   toggleModal(modalClick);
