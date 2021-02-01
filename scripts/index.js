@@ -83,6 +83,22 @@ function addFormSubmitHandler (e) {
   toggleModal(addCardModal);
 }
 
+function closeModalEscapeKey (e) {
+  const modalEscapeKey = document.querySelector('.modal_opened');
+  if(e.key === "Escape" || e.key === "Esc") {
+    toggleModal(modalEscapeKey);
+  }
+  e.target.removeEventListener('keydown', closeModalEscapeKey);
+}
+
+function closeModalClickOverlay (e) {
+  const modalClick = e.target;
+  if(!modalClick.classList.contains('modal_opened')) {
+    return;
+  }
+  toggleModal(modalClick);
+}
+
 editButton.addEventListener('click', () => {
   toggleModal(editProfileModal);
 });
@@ -105,6 +121,10 @@ closeImageButton.addEventListener('click', () => {
 editProfileModal.addEventListener('submit', editFormSubmitHandler);
 addCardModal.addEventListener('submit', addFormSubmitHandler);
 
+document.addEventListener('keydown', closeModalEscapeKey);
+document.addEventListener('click', closeModalClickOverlay);
+
 initialCards.forEach((card) => {
   renderCard(card);
 });
+
