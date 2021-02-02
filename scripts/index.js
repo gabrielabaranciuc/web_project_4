@@ -26,8 +26,6 @@ const cardsList = document.querySelector('.cards__list');
 
 function toggleModal(card) {
   card.classList.toggle('modal_opened');
-  document.addEventListener('keydown', closeModalEscapeKey);
-  document.addEventListener('click', closeModalClickOverlay);
 }
 
 function createCard(card) {
@@ -71,8 +69,6 @@ function editFormSubmitHandler(e) {
   profileTitle.textContent = titleInput.value;
 
   toggleModal(editProfileModal);
-  document.addEventListener('keydown', closeModalEscapeKey);
-  document.addEventListener('click', closeModalClickOverlay);
 }
 
 function addFormSubmitHandler(e) {
@@ -85,8 +81,6 @@ function addFormSubmitHandler(e) {
   };
   renderCard(newCard);
   toggleModal(addCardModal);
-  document.addEventListener('keydown', closeModalEscapeKey);
-  document.addEventListener('click', closeModalClickOverlay);
 }
 
 function closeModalEscapeKey(e) {
@@ -105,6 +99,21 @@ function closeModalClickOverlay(e) {
   toggleModal(modalClick);
   e.target.removeEventListener('click', closeModalClickOverlay);
 }
+
+function openModal(modal) {
+  modal.classList.add('modal_opened');
+  document.addEventListener('keydown', closeModalEscapeKey);
+  document.addEventListener('click', closeModalClickOverlay);
+}
+
+function closeModal(modal) {
+  modal.classList.remove('.modal_opened');
+  document.removeEventListener('keydown', closeModalEscapeKey);
+  document.removeEventListener('click', closeModalClickOverlay);
+}
+
+document.addEventListener('keydown', closeModalEscapeKey);
+document.addEventListener('click', closeModalClickOverlay);
 
 editButton.addEventListener('click', () => {
   toggleModal(editProfileModal);
