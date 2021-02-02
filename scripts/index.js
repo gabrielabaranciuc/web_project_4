@@ -85,7 +85,7 @@ function addFormSubmitHandler(e) {
 
 function closeModalEscapeKey(e) {
   const modalEscapeKey = document.querySelector('.modal_opened');
-  if (e.key === "Escape" && document.querySelector(".modal_opened")) {
+  if (e.key === "Escape" && modalEscapeKey) {
     toggleModal(modalEscapeKey);
   }
   e.target.removeEventListener('keydown', closeModalEscapeKey);
