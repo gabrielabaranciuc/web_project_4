@@ -23,9 +23,43 @@ const urlInput = document.querySelector('.form__input_type_url');
 const cardTemplate = document.querySelector('.card-template').content.querySelector('.card');
 const cardsList = document.querySelector('.cards__list');
 
+editButton.addEventListener('click', () => {
+  openModal(editProfileModal);
+});
 
-function toggleModal(card) {
-  card.classList.toggle('modal_opened');
+closeProfileButton.addEventListener('click', () => {
+  closeModal(editProfileModal);
+});
+
+addButton.addEventListener('click', () => {
+  openModal(addCardModal);
+});
+closeCardButton.addEventListener('click', () => {
+  closeModal(addCardModal);
+});
+
+closeImageButton.addEventListener('click', () => {
+  closeModal(openImageModal);
+});
+
+editProfileModal.addEventListener('submit', editFormSubmitHandler);
+addCardModal.addEventListener('submit', addFormSubmitHandler);
+
+initialCards.forEach((card) => {
+  renderCard(card);
+});
+
+
+function openModal(modal) {
+  modal.classList.add('modal_opened');
+  document.addEventListener('keydown', closeModalEscapeKey);
+  document.addEventListener('click', closeModalClickOverlay);
+}
+
+function closeModal(modal) {
+  modal.classList.remove('modal_opened');
+  document.removeEventListener('keydown', closeModalEscapeKey);
+  document.removeEventListener('click', closeModalClickOverlay);
 }
 
 function createCard(card) {
@@ -39,7 +73,6 @@ function createCard(card) {
   cardImage.style.backgroundImage = `url('${card.link}')`;
   cardTitle.textContent = card.name;
 
-
   cardDeleteButton.addEventListener('click', () => {
     listItem.remove();
   });
@@ -52,7 +85,7 @@ function createCard(card) {
     modalImage.src = `${card.link}`;
     modalImage.alt = `${card.name}`;
     modalImageCaption.textContent = card.name;
-    toggleModal(openImageModal);
+    openModal(openImageModal);
   });
 
   return cardElement;
@@ -68,7 +101,7 @@ function editFormSubmitHandler(e) {
   profileName.textContent = nameInput.value;
   profileTitle.textContent = titleInput.value;
 
-  toggleModal(editProfileModal);
+  closeModal(editProfileModal);
 }
 
 function addFormSubmitHandler(e) {
@@ -80,15 +113,14 @@ function addFormSubmitHandler(e) {
     link: urlInput.value
   };
   renderCard(newCard);
-  toggleModal(addCardModal);
+  closeModal(addCardModal);
 }
 
 function closeModalEscapeKey(e) {
   const modalEscapeKey = document.querySelector('.modal_opened');
   if (e.key === "Escape" && modalEscapeKey) {
-    toggleModal(modalEscapeKey);
+    closeModal(modalEscapeKey);
   }
-  e.target.removeEventListener('keydown', closeModalEscapeKey);
 }
 
 function closeModalClickOverlay(e) {
@@ -96,48 +128,5 @@ function closeModalClickOverlay(e) {
   if (!modalClick.classList.contains('modal_opened')) {
     return;
   }
-  toggleModal(modalClick);
-  e.target.removeEventListener('click', closeModalClickOverlay);
+  closeModal(modalClick);
 }
-
-function openModal(modal) {
-  modal.classList.add('modal_opened');
-  document.addEventListener('keydown', closeModalEscapeKey);
-  document.addEventListener('click', closeModalClickOverlay);
-}
-
-function closeModal(modal) {
-  modal.classList.remove('.modal_opened');
-  document.removeEventListener('keydown', closeModalEscapeKey);
-  document.removeEventListener('click', closeModalClickOverlay);
-}
-
-document.addEventListener('keydown', closeModalEscapeKey);
-document.addEventListener('click', closeModalClickOverlay);
-
-editButton.addEventListener('click', () => {
-  toggleModal(editProfileModal);
-});
-
-closeProfileButton.addEventListener('click', () => {
-  toggleModal(editProfileModal);
-});
-
-addButton.addEventListener('click', () => {
-  toggleModal(addCardModal);
-});
-closeCardButton.addEventListener('click', () => {
-  toggleModal(addCardModal);
-});
-
-closeImageButton.addEventListener('click', () => {
-  toggleModal(openImageModal);
-});
-
-editProfileModal.addEventListener('submit', editFormSubmitHandler);
-addCardModal.addEventListener('submit', addFormSubmitHandler);
-
-initialCards.forEach((card) => {
-  renderCard(card);
-});
-
