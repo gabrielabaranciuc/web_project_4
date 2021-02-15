@@ -22,7 +22,7 @@ class Card {
     }
 
     _cardDeleteButtonHandler(e) {
-        e.target.closest(".card").remove(this._card);
+        e.target.closest(".card").remove();
     }
 
     _cardLikeButtonHandler(e) {
