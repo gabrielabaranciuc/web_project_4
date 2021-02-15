@@ -1,5 +1,25 @@
+import { initialCards } from './initialCards.js';
+import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+
+const defaultConfig = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit-button",
+  inactiveButtonClass: "form__submit-button_inactive",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_visible"
+}
+
 const editProfileModal = document.querySelector('.modal_type_edit-profile');
 const addCardModal = document.querySelector('.modal_type_add-card');
+
+const editFormValidator = new FormValidator(defaultConfig, editProfileModal);
+const addFormValidator = new FormValidator(defaultConfig, addCardModal);
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
+
 const openImageModal = document.querySelector('.modal_type_image');
 
 const editButton = document.querySelector('.profile__edit-button');
@@ -15,12 +35,9 @@ const profileTitle = document.querySelector('.profile__title');
 const nameInput = document.querySelector('.form__input_type_name');
 const titleInput = document.querySelector('.form__input_type_title');
 
-const modalImage = document.querySelector('.modal__image');
-const modalImageCaption = document.querySelector('.modal__image-caption');
 const cardTitleInput = document.querySelector('.form__input_type_card-title');
 const urlInput = document.querySelector('.form__input_type_url');
 
-const cardTemplate = document.querySelector('.card-template').content.querySelector('.card');
 const cardsList = document.querySelector('.cards__list');
 
 editButton.addEventListener('click', () => {
@@ -46,7 +63,7 @@ editProfileModal.addEventListener('submit', editFormSubmitHandler);
 addCardModal.addEventListener('submit', addFormSubmitHandler);
 
 initialCards.forEach((card) => {
-  renderCard(card);
+  renderCard(card.name, card.link);
 });
 
 
@@ -62,37 +79,9 @@ function closeModal(modal) {
   document.removeEventListener('click', closeModalClickOverlay);
 }
 
-function createCard(card) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector('.card__image');
-  const cardTitle = cardElement.querySelector('.card__title');
-  const cardDeleteButton = cardElement.querySelector('.card__delete-button');
-  const cardLikeButton = cardElement.querySelector('.card__like-button');
-  const listItem = cardDeleteButton.closest(".card");
-
-  cardImage.style.backgroundImage = `url('${card.link}')`;
-  cardTitle.textContent = card.name;
-
-  cardDeleteButton.addEventListener('click', () => {
-    listItem.remove();
-  });
-
-  cardLikeButton.addEventListener('click', (e) => {
-    e.target.classList.toggle('card__like-button_active');
-  });
-
-  cardImage.addEventListener('click', () => {
-    modalImage.src = `${card.link}`;
-    modalImage.alt = `${card.name}`;
-    modalImageCaption.textContent = card.name;
-    openModal(openImageModal);
-  });
-
-  return cardElement;
-}
-
-function renderCard(card) {
-  cardsList.prepend(createCard(card));
+function renderCard(name, link) {
+  const card = new Card(name, link, '.card-template');
+  cardsList.prepend(card.createCard());
 }
 
 function editFormSubmitHandler(e) {
@@ -112,7 +101,7 @@ function addFormSubmitHandler(e) {
     name: cardTitleInput.value,
     link: urlInput.value
   };
-  renderCard(newCard);
+  renderCard(newCard.name, newCard.link);
   closeModal(addCardModal);
 }
 
@@ -130,3 +119,5 @@ function closeModalClickOverlay(e) {
   }
   closeModal(modalClick);
 }
+
+export { openModal };
