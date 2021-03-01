@@ -44,13 +44,13 @@
         <div class="modal__container">
             <h3 class="modal__header">Edit profile</h3>
             <form action="#" method="post" name="editForm" class="form" novalidate>
-                <input id="name-input" type="text" name="name" placeholder="Name"
+                <input id="inputName" type="text" name="name" placeholder="Name"
                     class="form__input form__input_type_name" value="Jacques Cousteau" minlength="2" maxlength="40"
                     required>
-                <span id="name-input-error" class="form__input-error"></span>
-                <input id="title-input" type="text" name="title" placeholder="About me"
+                <span id="inputName-error" class="form__input-error"></span>
+                <input id="inputTitle" type="text" name="title" placeholder="About me"
                     class="form__input form__input_type_title" value="Explorer" minlength="2" maxlength="200" required>
-                <span id="title-input-error" class="form__input-error"></span>
+                <span id="inputTitle-error" class="form__input-error"></span>
                 <button class="form__submit-button" type="submit" aria-label="Save button">Save</button>
             </form>
             <button class="modal__reset-button" type="reset" aria-label="Close button"></button>
@@ -62,12 +62,12 @@
         <div class="modal__container">
             <h3 class="modal__header">New place</h3>
             <form action="#" method="post" name="addForm" class="form" novalidate>
-                <input id="card-input" type="text" name="title" placeholder="Title"
+                <input id="inputCard" type="text" name="cardTitle" placeholder="Title"
                     class="form__input form__input_type_card-title" minlength="1" maxlength="30" required>
-                <span id="card-input-error" class="form__input-error"></span>
-                <input id="url-input" type="url" name="image-link" placeholder="Image link"
+                <span id="inputCard-error" class="form__input-error"></span>
+                <input id="inputUrl" type="url" name="imageLink" placeholder="Image link"
                     class="form__input form__input_type_url" required>
-                <span id="url-input-error" class="form__input-error"></span>
+                <span id="inputUrl-error" class="form__input-error"></span>
                 <button class="form__submit-button form__submit-button_inactive" type="submit"
                     aria-label="Create button">Create</button>
             </form>
@@ -79,7 +79,7 @@
     <div id="modal-image" class="modal modal_type_image">
         <figure class="modal__container modal__open-image">
             <button class="modal__reset-button" type="reset" aria-label="Close button"></button>
-            <img class="modal__image" src="#" alt="image">
+            <img class="modal__image" src="#" alt="">
             <figcaption class="modal__image-caption"></figcaption>
         </figure>
     </div>
@@ -96,7 +96,7 @@
         </li>
     </template>
 
-    <script type="module" src="./scripts/index.js"></script>
+    <script type="module" src="./pages/index.js"></script>
 </body>
 
 </html>

@@ -1,14 +1,12 @@
-class FormValidator {
-    constructor(settings, formElement) {
-        this._formSelector = settings.formSelector;
-        this._inputSelector = settings.inputSelector;
-        this._submitButtonSelector = settings.submitButtonSelector;
+export default class FormValidator {
+    constructor(config, formSelector) {
+        this._formElement = formSelector;
+        this._inputSelector = config.inputSelector;
+        this._submitButtonSelector = config.submitButtonSelector;
 
-        this._inactiveButtonClass = settings.inactiveButtonClass;
-        this._inputErrorClass = settings.inputErrorClass;
-        this._errorClass = settings.errorClass;
-
-        this._formElement = formElement;
+        this._inactiveButtonClass = config.inactiveButtonClass;
+        this._inputErrorClass = config.inputErrorClass;
+        this._errorClass = config.errorClass;
     }
 
     _showErrorMessage(input, errorMessage) {
@@ -66,5 +64,3 @@ class FormValidator {
         this._setEventListeners();
     }
 }
-
-export default FormValidator;
