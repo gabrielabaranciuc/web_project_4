@@ -12,8 +12,9 @@ import {
   inputTitle,
   editProfileModal,
   addCardModal,
+  cardTemplateSelector,
   config,
-  initialCards
+  initialCards,
 } from "../utils/constants.js";
 
 const editProfileValidator = new FormValidator(config, editProfileModal);
@@ -21,20 +22,23 @@ const addCardValidator = new FormValidator(config, addCardModal);
 editProfileValidator.enableValidation();
 addCardValidator.enableValidation();
 
-function createCard(cardData) {
-  const newCard = new Card(cardData, ".card-template", (link, text) => {
-    imagePopup.open(cardData.link, cardData.name);
-  });
-  const cardTemplate = newCard.generateCard();
-  return cardTemplate;
+export default function handleCardImageClick(cardTitle, imageLink) {
+  imagePopup.open(cardTitle, imageLink);
+}
+
+
+const cardTemplates = [];
+for (const card of initialCards) {
+  let cardTemp = new Card(card.name, card.link, cardTemplateSelector, handleCardImageClick);
+  cardTemp = cardTemp.generateCard();
+  cardTemplates.push(cardTemp);
 }
 
 const initialCardList = new Section(
   {
-    items: initialCards,
-    renderer: (item) => {
-      const cardTemplate = createCard(item);
-      initialCardList.addItem(cardTemplate);
+    items: cardTemplates,
+    renderer: (element) => {
+      initialCardList.addItem(element);
     },
   },
   ".cards__list"
@@ -43,16 +47,28 @@ initialCardList.renderItems();
 
 const imagePopup = new PopupWithImage(".modal_type_image");
 imagePopup.setEventListeners();
-const addCardPopup = new PopupWithForm(".modal_type_add-card", (values) => {
-  const cardData = { name: values.cardTitle, link: values.imageLink };
-  const card = createCard(cardData);
-  initialCardList.addItem(card);
-  addCardPopup.close();
-});
+
+
+const addCardPopup = new PopupWithForm(".modal_type_add-card", addFormSubmitHandler);
 addCardPopup.setEventListeners();
+
+function addFormSubmitHandler(inputValues, e, selector) {
+  e.preventDefault();
+  let newCard = new Card(
+    inputValues.cardTitle,
+    inputValues.imageLink,
+    selector,
+    handleCardImageClick
+  );
+  newCard = newCard.generateCard();
+  initialCardList.addItem(newCard);
+  addCardPopup.close();
+}
+
 addButton.addEventListener("click", () => {
   addCardPopup.open();
 });
+
 const editProfilePopup = new PopupWithForm(".modal_type_edit-profile", () => {
   userInfo.setUserInfo({ name: inputName.value, title: inputTitle.value });
   editProfilePopup.close();

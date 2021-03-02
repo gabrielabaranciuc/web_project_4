@@ -1,9 +1,9 @@
 export default class Card {
-    constructor(cardData, cardTemplateSelector, handleCardImageClick) {
-        this._text = cardData.name;
-        this._link = cardData.link;
+    constructor(name, link, cardTemplateSelector, handleCardClick) {
+        this._text = name;
+        this._link = link;
         this._cardTemplateSelector = cardTemplateSelector;
-        this._handleCardImageClick = handleCardImageClick;
+        this._handleCardImageClick = handleCardClick;
         this._handleCardImageClick = this._handleCardImageClick.bind(this);
     }
     _getCardTemplate() {
@@ -11,7 +11,17 @@ export default class Card {
             .querySelector(this._cardTemplateSelector)
             .content.querySelector(".card")
             .cloneNode(true);
+        this._placeTemp = cardTemplate;
+        this._imageTemp = cardTemplate.querySelector(".card__image");
+        this._nameTemp = cardTemplate.querySelector(".card__title");
+        this._likeButtonTemp = cardTemplate.querySelector(".card__like-button");
+        this._deleteButtonTemp = cardTemplate.querySelector(".card__delete-button");
         return cardTemplate;
+    }
+
+    _addContent() {
+        this._imageTemp.style.backgroundImage = `url(${this._link})`;
+        this._nameTemp.textContent = this._text;
     }
 
     _cardDeleteButtonHandler(e) {
@@ -23,28 +33,21 @@ export default class Card {
     }
 
     _setEventListeners() {
-        this._cardTemplate
-            .querySelector(".card__like-button")
+        this._likeButtonTemp
             .addEventListener("click", this._cardLikeButtonHandler);
-        this._cardTemplate
-            .querySelector(".card__delete-button")
+        this._deleteButtonTemp
             .addEventListener("click", this._cardDeleteButtonHandler);
 
-        this._cardTemplate
-            .querySelector(".card__image")
+        this._imageTemp
             .addEventListener("click", () =>
-                this._handleCardImageClick({ name: this._text, link: this._link })
+                this._handleCardImageClick(this._text, this._link)
             );
     }
-    
+
     generateCard() {
-        this._cardTemplate = this._getCardTemplate();
-        this._cardTemplate.querySelector(
-            ".card__image"
-        ).style.backgroundImage = `url('${this._link}')`;
-        this._cardTemplate.querySelector(".card__title")
-            .textContent = this._text;
+        const card = this._getCardTemplate();
+        this._addContent();
         this._setEventListeners();
-        return this._cardTemplate;
+        return card;
     }
 }

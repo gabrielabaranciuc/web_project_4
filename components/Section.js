@@ -9,7 +9,7 @@ export default class Section {
       this._renderer(item);
     });
   }
-  addItem(cardTemplate) {
-    this._container.prepend(cardTemplate);
+  addItem(element) {
+    this._container.prepend(element);
   }
 }
