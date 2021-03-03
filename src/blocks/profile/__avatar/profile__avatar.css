@@ -1,4 +1,5 @@
 .profile__avatar {
+    background-image: url("../../../Images/jacques-cousteau.jpg");
     background-position: center;
     background-size: contain;
     width: 120px;
