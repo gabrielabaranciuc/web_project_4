@@ -1,22 +1,21 @@
 export const cardTemplateSelector = ".card-template";
 export const editButton = document.querySelector(".profile__edit-button");
 export const addButton = document.querySelector(".profile__add-button");
-export const inputName = document.querySelector(".form__input_type_name");
-export const inputTitle = document.querySelector(".form__input_type_title");
-export const currentName = document.querySelector(".profile__name");
-export const currentTitle = document.querySelector(".profile__title");
-export const templateCard = document.querySelector(".card-template").content;
-export const editProfileModal = document.querySelector(".modal_type_edit-profile");
-export const addCardModal = document.querySelector(".modal_type_add-card");
-export const imagePopupSelector = ".modal__open-image";
-export const config = {
+export const profileName = document.querySelector(".profile__name");
+export const profileJob = document.querySelector(".profile__title");
+export const closeButtonSelector = ".modal__reset-button";
+export const listWrapper = ".cards__list";
+export const openImageModal = ".modal_type_image";
+export const editProfileModal = ".modal_type_edit-profile";
+export const addCardModal = ".modal_type_add-card";
+
+export const defaultConfig = {
   formSelector: ".form",
   inputSelector: ".form__input",
   submitButtonSelector: ".form__submit-button",
   inactiveButtonClass: "form__submit-button_inactive",
   inputErrorClass: "form__input_type_error",
   errorClass: "form__input-error_visible",
-  cardTemplateSelector: ".card-template",
 };
 export const initialCards = [
   {

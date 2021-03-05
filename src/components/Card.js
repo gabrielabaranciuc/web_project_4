@@ -1,53 +1,51 @@
 export default class Card {
-    constructor(name, link, cardTemplateSelector, handleCardClick) {
-        this._text = name;
-        this._link = link;
-        this._cardTemplateSelector = cardTemplateSelector;
-        this._handleCardImageClick = handleCardClick;
-        this._handleCardImageClick = this._handleCardImageClick.bind(this);
-    }
-    _getCardTemplate() {
-        const cardTemplate = document
-            .querySelector(this._cardTemplateSelector)
-            .content.querySelector(".card")
-            .cloneNode(true);
-        this._placeTemp = cardTemplate;
-        this._imageTemp = cardTemplate.querySelector(".card__image");
-        this._nameTemp = cardTemplate.querySelector(".card__title");
-        this._likeButtonTemp = cardTemplate.querySelector(".card__like-button");
-        this._deleteButtonTemp = cardTemplate.querySelector(".card__delete-button");
-        return cardTemplate;
-    }
+  constructor({ cardItem, handleCardClick }, cardTemplateSelector) {
+    this._name = cardItem.name;
+    this._link = cardItem.link;
+    this._cardTemplateSelector = cardTemplateSelector;
+    this._handleCardClick = handleCardClick;
+  }
 
-    _addContent() {
-        this._imageTemp.style.backgroundImage = `url(${this._link})`;
-        this._nameTemp.textContent = this._text;
-    }
+  _getCardTemplate() {
+    const cardTemplate = document
+      .querySelector(this._cardTemplateSelector)
+      .content.querySelector(".card")
+      .cloneNode(true);
 
-    _cardDeleteButtonHandler(e) {
-        e.target.closest(".card").remove();
-    }
+    return cardTemplate;
+  }
 
-    _cardLikeButtonHandler(e) {
+  _setEventListeners() {
+    this._card
+      .querySelector(".card__like-button")
+      .addEventListener("click", (e) => {
         e.target.classList.toggle("card__like-button_active");
-    }
+      });
 
-    _setEventListeners() {
-        this._likeButtonTemp
-            .addEventListener("click", this._cardLikeButtonHandler);
-        this._deleteButtonTemp
-            .addEventListener("click", this._cardDeleteButtonHandler);
+    this._card
+      .querySelector(".card__delete-button")
+      .addEventListener("click", () => {
+        this._card.remove();
+        this._card = null;
+      });
 
-        this._imageTemp
-            .addEventListener("click", () =>
-                this._handleCardImageClick(this._text, this._link)
-            );
-    }
+    this._card.querySelector(".card__image")
+      .addEventListener("click", () => {
+        this._handleCardClick({
+          name: this._name,
+          link: this._link,
+        });
+      });
+  }
 
-    generateCard() {
-        const card = this._getCardTemplate();
-        this._addContent();
-        this._setEventListeners();
-        return card;
-    }
+  generateCard() {
+    this._card = this._getCardTemplate();
+    this._card.querySelector(
+      ".card__image"
+    ).style.backgroundImage = `url(${this._link})`;
+    this._card.querySelector(".card__title")
+      .textContent = this._name;
+    this._setEventListeners();
+    return this._card;
+  }
 }
