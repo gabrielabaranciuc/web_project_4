@@ -20,6 +20,7 @@ import {
 
 const popupWithImage = new PopupWithImage(openImageModal);
 popupWithImage.setEventListeners();
+
 const createCard = (cardItem) => {
   const createNewCard = new Card(
     {
@@ -30,7 +31,6 @@ const createCard = (cardItem) => {
     },
     cardTemplateSelector
   );
-
   const cardTemplate = createNewCard.generateCard();
   return cardTemplate;
 }
@@ -49,7 +49,7 @@ cardList.renderItems();
 const addFormElement = new PopupWithForm({
   popupSelector: addCardModal,
   submitHandler: (cardItem) => {
-    document.querySelector(".cards__list").prepend(createCard(cardItem));
+    cardList.addItem(createCard(cardItem));
   },
 });
 addFormElement.setEventListeners();
@@ -57,15 +57,22 @@ addButton.addEventListener('click', () => {
   addFormElement.open();
 });
 
+const userInfo = new UserInfo({
+  nameSelector: ".profile__name",
+  titleSelector: ".profile__title",
+});
+
 const editFormElement = new PopupWithForm({
   popupSelector: editProfileModal,
-  submitHandler: (cardItem) => {
-    const infoUser = new UserInfo(cardItem);
-    infoUser.setUserInfo();
+  submitHandler: (data) => {
+    userInfo.setUserInfo(data);
   },
 });
 editFormElement.setEventListeners();
-editButton.addEventListener('click', () => {
+editButton.addEventListener("click", () => {
+  const { name, title } = userInfo.getUserInfo();
+  nameInput.value = name;
+  titleInput.value = title;
   editFormElement.open();
 });
 

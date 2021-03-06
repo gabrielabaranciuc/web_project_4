@@ -44,13 +44,13 @@
         <div class="modal__container">
             <h3 class="modal__header">Edit profile</h3>
             <form action="#" method="post" name="editForm" class="form" novalidate>
-                <input id="profile-input" type="text" name="profile" placeholder="Name"
+                <input id="nameInput" type="text" name="name" placeholder="Name"
                     class="form__input form__input_type_name" value="Jacques Cousteau" minlength="2" maxlength="40"
                     required>
-                <span id="profile-input-error" class="form__input-error"></span>
-                <input id="job-input" type="text" name="job" placeholder="About me"
+                <span id="nameInput-error" class="form__input-error"></span>
+                <input id="titleInput" type="text" name="title" placeholder="About me"
                     class="form__input form__input_type_title" value="Explorer" minlength="2" maxlength="200" required>
-                <span id="job-input-error" class="form__input-error"></span>
+                <span id="titleInput-error" class="form__input-error"></span>
                 <button class="form__submit-button" type="submit" aria-label="Save button">Save</button>
             </form>
             <button class="modal__reset-button" type="reset" aria-label="Close button"></button>
