@@ -1,4 +1,4 @@
-.modal__container_type_delete-card {
+.modal__delete-card {
     background-color: #FFFFFF;
     width: 430px;
     height: 181px;
@@ -17,7 +17,7 @@
 }
 
 @media screen and (max-width: 591px) {
-    .modal__container_type_delete-card {
+    .modal__delete-card {
         width: 282px;
         height: 250px;
         padding: 25px 22px;

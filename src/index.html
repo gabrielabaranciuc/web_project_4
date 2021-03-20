@@ -46,7 +46,7 @@
     <div id="modal-edit" class="modal modal_type_edit-profile">
         <div class="modal__container">
             <h3 class="modal__header">Edit profile</h3>
-            <form action="#" method="post" name="editForm" class="form edit__form" novalidate>
+            <form action="#" method="post" name="editForm" class="form" novalidate>
                 <input id="nameInput" type="text" name="name" placeholder="Name"
                     class="form__input form__input_type_name" value="Jacques Cousteau" minlength="2" maxlength="40"
                     required>
@@ -64,7 +64,7 @@
     <div id="modal-add" class="modal modal_type_add-card">
         <div class="modal__container">
             <h3 class="modal__header">New place</h3>
-            <form action="#" method="post" name="addForm" class="form add__form" novalidate>
+            <form action="#" method="post" name="addForm" class="form" novalidate>
                 <input id="name-input" type="text" name="title" placeholder="Title"
                     class="form__input form__input_type_card-title" minlength="1" maxlength="30" required>
                 <span id="name-input-error" class="form__input-error"></span>
@@ -89,8 +89,8 @@
 
     <!-- modal delete card -->
     <div class="modal modal_type_delete-card">
-        <div class="modal__container_type_delete-card">
-            <form class="form delete__form" action="#" name="delete-card" novalidate>
+        <div class="modal__container modal__delete-card">
+            <form class="form" action="#" name="delete-card" novalidate>
                 <h2 class="form__title">Are you sure?</h2>
                 <button class="form__submit-button" type="submit">Yes</button>
             </form>
@@ -100,9 +100,9 @@
 
     <!-- modal change avatar -->
     <div id="modal-avatar" class="modal modal_type_change-avatar">
-        <div class="modal__container_type_avatar">
+        <div class="modal__container modal__change-avatar">
             <h3 class="modal__header">Change profile picture</h3>
-            <form action="#" method="PATCH" name="editAvatarForm" class="form avatar__form" novalidate>
+            <form action="#" method="PATCH" name="editAvatarForm" class="form" novalidate>
                 <input id="avatar-input" type="url" name="imageLink" placeholder="Profile image link"
                     class="form__input form__input_type_url" value="" required>
                 <span id="avatar-input-error" class="form__input-error"></span>

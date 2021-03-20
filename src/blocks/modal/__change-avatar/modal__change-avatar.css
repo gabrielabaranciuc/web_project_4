@@ -1,4 +1,4 @@
-.modal__container_type_avatar {
+.modal__change-avatar {
     background-color: #FFFFFF;
     width: 430px;
     height: 272px;
@@ -17,7 +17,7 @@
 }
 
 @media screen and (max-width: 591px) {
-    .modal__container_type_avatar {
+    .modal__change-avatar {
         width: 282px;
         height: 250px;
         padding: 25px 22px;
