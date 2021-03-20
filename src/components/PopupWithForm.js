@@ -5,12 +5,13 @@ export default class PopupWithForm extends Popup {
     super(popupSelector);
     this._submitHandler = submitHandler;
     this._formElement = this._popupElement.querySelector(".form");
+    this._formButton = this._popupElement.querySelector(".form__submit-button");
+    this._inputList = this._popupElement.querySelectorAll(".form__input");
   }
 
   _getInputValues() {
-    this._inputList = this._popupElement.querySelectorAll('.form__input');
     this._formValues = {};
-    this._inputList.forEach(inputElement => this._formValues[inputElement.name] = inputElement.value);
+    this._inputList.forEach((inputElement) => this._formValues[inputElement.name] = inputElement.value);
     return this._formValues;
   }
 
@@ -18,15 +19,37 @@ export default class PopupWithForm extends Popup {
     super.setEventListeners();
     this._popupElement.addEventListener("submit", (e) => {
       e.preventDefault();
+      this.renderLoading(true);
       this._submitHandler(
-        this._getInputValues()
+        this._getInputValues(),
+        this._listItem,
+        this._cardId
       );
       this.close();
     });
   }
 
+  _removeEventListeners() {
+    super._removeEventListeners();
+    this._formElement.removeEventListener("submit", this._submitHandler);
+  }
+
   close() {
     super.close();
+    this._removeEventListeners();
     this._formElement.reset();
+  }
+
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._formButton.textContent = "Saving...";
+    }
+    else {
+      this._formButton.textContent = this._formButton.dataset.text;
+    }
+  }
+
+  setSubmitAction(action) {
+    this._submitHandler = action;
   }
 }

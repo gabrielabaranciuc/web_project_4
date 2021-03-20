@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Around The US</title>
-    <!-- <link rel="stylesheet" href="./pages/index.css" /> -->
     <meta name="description" content="Gabriela Baranciuc - Project Portfolio - Practicum by Yandex">
     <meta name="keywords" content="html, css, javascript">
     <meta name="author" content="Gabriela Baranciuc">
@@ -18,11 +17,15 @@
     <main class="content">
         <section class="profile">
             <div class="profile__container">
-                <div class="profile__avatar"></div>
+                <div class="profile__image-container">
+                    <div class="profile__avatar"></div>
+                    <button class="profile__button profile__button_edit-avatar profile__button_hoverable"
+                        aria-label="edit-avatar" type="button"></button>
+                </div>
                 <div class="profile__info">
                     <div class="profile__text">
-                        <h1 class="profile__name">Jacques Cousteau</h1>
-                        <p class="profile__title">Explorer</p>
+                        <h1 class="profile__name"></h1>
+                        <p class="profile__title"></p>
                     </div>
                     <button class="button profile__edit-button" aria-label="edit" type="button"></button>
                 </div>
@@ -43,12 +46,12 @@
     <div id="modal-edit" class="modal modal_type_edit-profile">
         <div class="modal__container">
             <h3 class="modal__header">Edit profile</h3>
-            <form action="#" method="post" name="editForm" class="form" novalidate>
+            <form action="#" method="post" name="editForm" class="form edit__form" novalidate>
                 <input id="nameInput" type="text" name="name" placeholder="Name"
                     class="form__input form__input_type_name" value="Jacques Cousteau" minlength="2" maxlength="40"
                     required>
                 <span id="nameInput-error" class="form__input-error"></span>
-                <input id="titleInput" type="text" name="title" placeholder="About me"
+                <input id="titleInput" type="text" name="job" placeholder="About me"
                     class="form__input form__input_type_title" value="Explorer" minlength="2" maxlength="200" required>
                 <span id="titleInput-error" class="form__input-error"></span>
                 <button class="form__submit-button" type="submit" aria-label="Save button">Save</button>
@@ -61,8 +64,8 @@
     <div id="modal-add" class="modal modal_type_add-card">
         <div class="modal__container">
             <h3 class="modal__header">New place</h3>
-            <form action="#" method="post" name="addForm" class="form" novalidate>
-                <input id="name-input" type="text" name="name" placeholder="Title"
+            <form action="#" method="post" name="addForm" class="form add__form" novalidate>
+                <input id="name-input" type="text" name="title" placeholder="Title"
                     class="form__input form__input_type_card-title" minlength="1" maxlength="30" required>
                 <span id="name-input-error" class="form__input-error"></span>
                 <input id="link-input" type="url" name="link" placeholder="Image link"
@@ -84,19 +87,47 @@
         </figure>
     </div>
 
+    <!-- modal delete card -->
+    <div class="modal modal_type_delete-card">
+        <div class="modal__container_type_delete-card">
+            <form class="form delete__form" action="#" name="delete-card" novalidate>
+                <h2 class="form__title">Are you sure?</h2>
+                <button class="form__submit-button" type="submit">Yes</button>
+            </form>
+            <button class="modal__reset-button" type="reset" aria-label="Close button"></button>
+        </div>
+    </div>
+
+    <!-- modal change avatar -->
+    <div id="modal-avatar" class="modal modal_type_change-avatar">
+        <div class="modal__container_type_avatar">
+            <h3 class="modal__header">Change profile picture</h3>
+            <form action="#" method="PATCH" name="editAvatarForm" class="form avatar__form" novalidate>
+                <input id="avatar-input" type="url" name="imageLink" placeholder="Profile image link"
+                    class="form__input form__input_type_url" value="" required>
+                <span id="avatar-input-error" class="form__input-error"></span>
+                <button class="form__submit-button form__submit-button_inactive" type="submit" value="Save"
+                    aria-label="Save button">Save</button>
+            </form>
+            <button class="modal__reset-button" type="reset" aria-label="Close button"></button>
+        </div>
+    </div>
+
     <!-- template cards -->
     <template class="card-template">
         <li class="card">
-            <button class="card__delete-button" aria-label="delete" type="button"></button>
+            <button class="card__delete-button" aria-label="delete-card" type="button"></button>
             <div class="card__image"></div>
             <div class="card__text">
                 <h2 class="card__title"></h2>
-                <button class="card__like-button" aria-label="like" type="button"></button>
+                <div class="card__like-container">
+                    <button class="card__like-button" aria-label="like-card" type="button"></button>
+                    <p class="card__like-counter"></p>
+                </div>
             </div>
         </li>
     </template>
 
-    <!-- <script type="module" src="./index.js"></script> -->
 </body>
 
 </html>

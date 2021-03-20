@@ -1,7 +1,8 @@
 .profile__avatar {
     background-image: url("../../../Images/jacques-cousteau.jpg");
     background-position: center;
-    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
     width: 120px;
     height: 120px;
     margin-left: 0;

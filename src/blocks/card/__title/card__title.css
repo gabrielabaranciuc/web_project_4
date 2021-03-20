@@ -4,6 +4,8 @@
     font-weight: 900;
     line-height: 29px;
     text-overflow: ellipsis;
+    align-self: center;
+    margin-bottom: auto;
     white-space: nowrap;
     overflow: hidden;
     color: #000000;
