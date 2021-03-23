@@ -148,7 +148,7 @@ const editFormElement = new PopupWithForm({
       .finally(() => editFormElement.renderLoading(false));
   },
 });
- editFormElement.setEventListeners();
+editFormElement.setEventListeners();
 editButton.addEventListener("click", () => {
   const profileData = userInfo.getUserInfo();
   inputName.value = profileData.name;

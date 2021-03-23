@@ -15,7 +15,7 @@ export default class UserInfo {
   }
 
   setUserInfo(userInfo) {
-    if (userInfo.avatar){
+    if (userInfo.avatar) {
       this._profileImageEl.src = userInfo.avatar;
     }
     this._profileNameEl.textContent = userInfo.name;
