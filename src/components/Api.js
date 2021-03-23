@@ -20,7 +20,7 @@ export default class Api {
       });
   }
 
-  loadUserInfo() {
+  getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     })
@@ -32,12 +32,12 @@ export default class Api {
       });
   }
 
-  changeAvatar(avatar) {
+  changeAvatar(formData) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify(
-        { avatar: avatar.imageLink }
+        { avatar: formData.imageLink }
       ),
     })
       .then((res) =>
@@ -48,13 +48,13 @@ export default class Api {
       });
   }
 
-  changeUserInfo(data) {
+  changeUserInfo(formData) {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       method: "PATCH",
       body: JSON.stringify({
-        name: data.name,
-        about: data.job,
+        name: formData.name,
+        about: formData.job,
       }),
     })
       .then((res) =>
@@ -65,13 +65,13 @@ export default class Api {
       });
   }
 
-  addCard(data) {
+  addCard(formData) {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
       method: "POST",
       body: JSON.stringify({
-        name: data.title,
-        link: data.link,
+        name: formData.title,
+        link: formData.link,
       }),
     })
       .then((res) =>

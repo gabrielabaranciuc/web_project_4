@@ -19,11 +19,14 @@ export const profileAvatarButton = document.querySelector(".profile__button_edit
 export const closeButtonSelector = ".modal__reset-button";
 export const listWrapper = ".cards__list";
 export const openImageModal = ".modal_type_image";
-export const editProfileModal = ".modal_type_edit-profile";
+export const editProfileModal = document.querySelector(".modal_type_edit-profile");
 export const addCardModal = ".modal_type_add-card";
 export const cardTemplateSelector = ".card-template";
 export const deleteCardModal = ".modal_type_delete-card";
 export const changeAvatarModal = ".modal_type_change-avatar";
+const profileForm = editProfileModal.querySelector(".form");
+export const inputName = profileForm.querySelector(".form__input_type_name");
+export const inputTitle = profileForm.querySelector(".form__input_type_title");
 
 export const EscKey = 27;
 

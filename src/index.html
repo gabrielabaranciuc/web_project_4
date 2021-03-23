@@ -18,7 +18,7 @@
         <section class="profile">
             <div class="profile__container">
                 <div class="profile__image-container">
-                    <div class="profile__avatar"></div>
+                    <img class="profile__avatar" src="" alt="profile image">
                     <button class="profile__button profile__button_edit-avatar profile__button_hoverable"
                         aria-label="edit-avatar" type="button"></button>
                 </div>
@@ -54,7 +54,7 @@
                 <input id="titleInput" type="text" name="job" placeholder="About me"
                     class="form__input form__input_type_title" value="Explorer" minlength="2" maxlength="200" required>
                 <span id="titleInput-error" class="form__input-error"></span>
-                <button class="form__submit-button" type="submit" aria-label="Save button">Save</button>
+                <button class="form__submit-button" type="submit" data-text="Save">Save</button>
             </form>
             <button class="modal__reset-button" type="reset" aria-label="Close button"></button>
         </div>
@@ -72,7 +72,7 @@
                     class="form__input form__input_type_url" required>
                 <span id="link-input-error" class="form__input-error"></span>
                 <button class="form__submit-button form__submit-button_inactive" type="submit"
-                    aria-label="Create button">Create</button>
+                data-text="Create">Create</button>
             </form>
             <button class="modal__reset-button" type="reset" aria-label="Close button"></button>
         </div>
@@ -82,7 +82,7 @@
     <div id="modal-image" class="modal modal_type_image">
         <figure class="modal__container modal__open-image">
             <button class="modal__reset-button" type="reset" aria-label="Close button"></button>
-            <img class="modal__image" src="#" alt="">
+            <img class="modal__image" src="#" alt="image">
             <figcaption class="modal__image-caption"></figcaption>
         </figure>
     </div>
@@ -92,7 +92,7 @@
         <div class="modal__container modal__delete-card">
             <form class="form" action="#" name="delete-card" novalidate>
                 <h2 class="form__title">Are you sure?</h2>
-                <button class="form__submit-button" type="submit">Yes</button>
+                <button class="form__submit-button" type="submit" data-text="Yes">Yes</button>
             </form>
             <button class="modal__reset-button" type="reset" aria-label="Close button"></button>
         </div>
@@ -107,7 +107,7 @@
                     class="form__input form__input_type_url" value="" required>
                 <span id="avatar-input-error" class="form__input-error"></span>
                 <button class="form__submit-button form__submit-button_inactive" type="submit" value="Save"
-                    aria-label="Save button">Save</button>
+                data-text="Save">Save</button>
             </form>
             <button class="modal__reset-button" type="reset" aria-label="Close button"></button>
         </div>

@@ -14,11 +14,12 @@ export default class UserInfo {
     };
   }
 
-  setUserInfo(inputValues) {
-    this._profileNameEl.textContent = inputValues.name;
-    this._profileJobEl.textContent = inputValues.about;
-    this._profileImageEl.src = inputValues.avatar;
-    this._id = inputValues._id;
+  setUserInfo(userInfo) {
+    if (userInfo.avatar){
+      this._profileImageEl.src = userInfo.avatar;
+    }
+    this._profileNameEl.textContent = userInfo.name;
+    this._profileJobEl.textContent = userInfo.about;
   }
 }
 

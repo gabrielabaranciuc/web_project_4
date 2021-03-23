@@ -15,7 +15,8 @@ import {
   addButton,
   listWrapper,
   cardTemplateSelector,
-  editProfileModal,
+  inputName,
+  inputTitle,
   addCardModal,
   profileAvatarButton,
   changeAvatarModal,
@@ -76,9 +77,9 @@ const userInfo = new UserInfo({
   imageSelector: ".profile__avatar",
 });
 api
-  .loadUserInfo()
-  .then((data) => {
-    userInfo.setUserInfo(data);
+  .getUserInfo()
+  .then((formData) => {
+    userInfo.setUserInfo(formData);
   })
   .catch((err) => {
     console.log(err);
@@ -100,9 +101,10 @@ api
 
 const addFormElement = new PopupWithForm({
   popupSelector: addCardModal,
-  submitHandler: (data) => {
+  submitHandler: (formData) => {
+    addFormElement.renderLoading(true);
     api
-      .addCard(data)
+      .addCard(formData)
       .then((result) => {
         document.querySelector(listWrapper).prepend(createCard(result));
         addFormElement.close();
@@ -117,15 +119,14 @@ addButton.addEventListener("click", () => {
 
 const avatarFormElement = new PopupWithForm({
   popupSelector: changeAvatarModal,
-  submitHandler: (avatar) => {
+  submitHandler: (formData) => {
     avatarFormElement.renderLoading(true);
     api
-      .changeAvatar(avatar)
+      .changeAvatar(formData)
       .then((result) => {
-        userInfo.setUserInfo(result.avatar);
-        userInfo.getUserInfo();
-        avatarFormElement.close();
+        userInfo.setUserInfo(result);
       })
+      .catch(console.log)
       .finally(() => avatarFormElement.renderLoading(false));
   },
 })
@@ -135,21 +136,24 @@ profileAvatarButton.addEventListener("click", () => {
 });
 
 const editFormElement = new PopupWithForm({
-  popupSelector: editProfileModal,
-  submitHandler: (inputValues) => {
+  popupSelector: ".modal_type_edit-profile",
+  submitHandler: (formData) => {
     editFormElement.renderLoading(true);
     api
-      .changeUserInfo(inputValues)
-      .then((data) => {
-        userInfo.setUserInfo(data);
+      .changeUserInfo(formData)
+      .then((result) => {
+        userInfo.setUserInfo(result);
       })
-      .then(() => editFormElement.close())
+      .catch(console.log)
       .finally(() => editFormElement.renderLoading(false));
   },
 });
-editFormElement.setEventListeners();
+ editFormElement.setEventListeners();
 editButton.addEventListener("click", () => {
-  editFormElement.open(userInfo.getUserInfo());
+  const profileData = userInfo.getUserInfo();
+  inputName.value = profileData.name;
+  inputTitle.value = profileData.job;
+  editFormElement.open();
 });
 
 const formList = Array.from(
