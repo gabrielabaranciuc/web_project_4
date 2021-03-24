@@ -23,6 +23,7 @@ import {
   deleteCardModal,
 } from "../utils/constants.js";
 
+
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-7",
   headers: {
@@ -31,6 +32,9 @@ const api = new Api({
   },
 });
 
+let myId;
+
+
 const popupWithImage = new PopupWithImage(openImageModal);
 popupWithImage.setEventListeners();
 
@@ -38,23 +42,25 @@ const deleteFormElement = new PopupWithForm({
   popupSelector: deleteCardModal,
 });
 
+
 deleteFormElement.setEventListeners();
 
-const createCard = (cardItem) => {
-  const createNewCard = new Card(
+const createNewCard = (cardItem, myId) => {
+  const card = new Card(
     {
       cardItem,
       handleCardClick: ({ title, link }) => {
         popupWithImage.open(title, link);
       },
-      handleDeleteClick: (card) => {
-        deleteFormElement.open();
+      handleDeleteClick: (cardItem) => {
+        deleteFormElement.open({ cardId: cardItem._id });
         deleteFormElement.setSubmitAction(() => {
           api
             .deleteCard(card.id())
             .then(() => {
               card.remove();
             })
+            .catch((err) => console.log("Error! " + err))
             .finally(() => deleteFormElement.renderLoading(false));
         });
       },
@@ -63,41 +69,40 @@ const createCard = (cardItem) => {
           likeCounter.textContent = result.likes.length;
         });
       },
+      myId,
     },
     cardTemplateSelector,
-    userInfo.getUserInfo().userId
+    userProfileInfo.getUserInfo.myId,
   );
-  const cardTemplate = createNewCard.generateCard();
+  const cardTemplate = card.generateCard();
   return cardTemplate;
 };
 
-const userInfo = new UserInfo({
+const cardList = new Section({
+  items: [], renderer: (cardItem) => {
+    cardList.addItem(createNewCard(cardItem, myId));
+  }
+}, listWrapper);
+
+const userProfileInfo = new UserInfo({
   nameSelector: ".profile__name",
   jobSelector: ".profile__title",
   imageSelector: ".profile__avatar",
 });
+
 api
-  .getUserInfo()
-  .then((formData) => {
-    userInfo.setUserInfo(formData);
+  .getAppInfo()
+  .then(([initialCards, userInfo]) => {
+   myId = userInfo._id;
+    userProfileInfo.setUserInfo(userInfo);
+    initialCards.forEach((cardItem) => {
+      cardList.addItem(createNewCard(cardItem, userInfo._id));
+    });
   })
   .catch((err) => {
     console.log(err);
-  })
-  .then(() => {
-    api.getInitialCards().then((result) => {
-      const cardList = new Section(
-        {
-          items: result,
-          renderer: (cardItem) => {
-            cardList.addItem(createCard(cardItem));
-          },
-        },
-        listWrapper
-      );
-      cardList.renderItems();
-    });
   });
+
 
 const addFormElement = new PopupWithForm({
   popupSelector: addCardModal,
@@ -105,11 +110,19 @@ const addFormElement = new PopupWithForm({
     addFormElement.renderLoading(true);
     api
       .addCard(formData)
-      .then((result) => {
-        document.querySelector(listWrapper).prepend(createCard(result));
+      .then((cardItem) => {
+        cardList.prependItem(createNewCard(cardItem, cardItem.owner._id), true);
+      })
+      .then(() => {
         addFormElement.close();
       })
-      .finally(() => addFormElement.renderLoading(false));
+      .then(() => {
+        addFormElement.renderLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => addFormElement.renderLoading(false))
   },
 });
 addFormElement.setEventListeners();
@@ -124,7 +137,7 @@ const avatarFormElement = new PopupWithForm({
     api
       .changeAvatar(formData)
       .then((result) => {
-        userInfo.setUserInfo(result);
+        userProfileInfo.setUserInfo(result);
       })
       .catch(console.log)
       .finally(() => avatarFormElement.renderLoading(false));
@@ -142,7 +155,7 @@ const editFormElement = new PopupWithForm({
     api
       .changeUserInfo(formData)
       .then((result) => {
-        userInfo.setUserInfo(result);
+        userProfileInfo.setUserInfo(result);
       })
       .catch(console.log)
       .finally(() => editFormElement.renderLoading(false));
@@ -150,7 +163,7 @@ const editFormElement = new PopupWithForm({
 });
 editFormElement.setEventListeners();
 editButton.addEventListener("click", () => {
-  const profileData = userInfo.getUserInfo();
+  const profileData = userProfileInfo.getUserInfo();
   inputName.value = profileData.name;
   inputTitle.value = profileData.job;
   editFormElement.open();
@@ -163,3 +176,5 @@ formList.forEach((formElement) => {
   const formValidate = new FormValidator(defaultConfig, formElement);
   formValidate.enableValidation();
 });
+
+

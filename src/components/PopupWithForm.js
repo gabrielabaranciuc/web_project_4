@@ -29,14 +29,8 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  _removeEventListeners() {
-    super._removeEventListeners();
-    this._formElement.removeEventListener("submit", this._submitHandler);
-  }
-
   close() {
     super.close();
-    this._removeEventListeners();
     this._formElement.reset();
   }
 

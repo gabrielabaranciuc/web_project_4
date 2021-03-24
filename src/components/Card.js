@@ -1,12 +1,13 @@
 import { myId } from '../utils/constants.js';
 
 export default class Card {
-  constructor({ cardItem, handleCardClick, handleDeleteClick, handleLikeClick }, cardTemplateSelector, userId) {
+  constructor({ cardItem, handleCardClick, handleDeleteClick, handleLikeClick }, cardTemplateSelector, myId) {
     this._name = cardItem.name;
     this._link = cardItem.link;
     this._likes = cardItem.likes;
     this._cardItem = cardItem;
-    this._userId = userId;
+    this._myId = myId;
+    this._userId = this._myId
     this._id = cardItem._id;
     this._ownerId = cardItem.owner._id;
     this._cardTemplateSelector = cardTemplateSelector;
@@ -25,13 +26,13 @@ export default class Card {
   }
 
   _setEventListeners() {
-    const listItem = this._card
-      .querySelector(".card__delete-button")
-      .closest(".card");
-    this._card
-      .querySelector(".card__delete-button")
-      .addEventListener("click", () => {
-        this._handleDeleteClick(this);
+    const listItem = this._card 
+      .querySelector(".card__delete-button") 
+      .closest(".card"); 
+      this._card 
+      .querySelector(".card__delete-button") 
+      .addEventListener("click", () => { 
+        this._handleDeleteClick(this._card, this._id);
       });
 
     this._card
@@ -66,9 +67,9 @@ export default class Card {
           .classList.toggle("card__like-button_active");
       }
     });
-    const newCardDeleteButton = this._card.querySelector('.card__delete-button');
-    if (this._ownerId !== myId) {
-      newCardDeleteButton.style.display = 'none';
+    const newCardDeleteButton = this._card.querySelector('.card__delete-button'); 
+    if (this._ownerId !== myId) { 
+      newCardDeleteButton.style.display = 'none'; 
     }
   }
 

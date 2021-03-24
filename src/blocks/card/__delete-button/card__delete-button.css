@@ -9,6 +9,7 @@
     right: 15px;
     border-style: none;
     transition: 0.3s linear;
+    display: block;
 }
 
 .card__delete-button:hover {

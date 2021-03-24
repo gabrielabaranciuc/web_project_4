@@ -20,6 +20,7 @@ export default class UserInfo {
     }
     this._profileNameEl.textContent = userInfo.name;
     this._profileJobEl.textContent = userInfo.about;
+    this._id = this._myId;
   }
 }
 

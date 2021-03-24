@@ -28,6 +28,4 @@ const profileForm = editProfileModal.querySelector(".form");
 export const inputName = profileForm.querySelector(".form__input_type_name");
 export const inputTitle = profileForm.querySelector(".form__input_type_title");
 
-export const EscKey = 27;
-
 export const myId = "a48b9cd997833ba8b6a73b1c";
