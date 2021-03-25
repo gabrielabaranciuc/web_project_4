@@ -1,9 +1,0 @@
-.form__input_type_image-url {
-    margin-bottom: 38px;
-}
-
-@media screen and (max-width: 591px) {
-    .form__input_type_image-url {
-        margin-bottom: 48px;
-     }
-}
